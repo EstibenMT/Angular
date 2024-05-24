@@ -6,15 +6,18 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "serve": "node --max-old-space-size=3072 ./node_modules/@angular/cli/bin/ng serve --o"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.1.0",
+    "@angular/cdk": "^17.3.10",
     "@angular/common": "^17.1.0",
     "@angular/compiler": "^17.1.0",
     "@angular/core": "^17.1.0",
     "@angular/forms": "^17.1.0",
+    "@angular/material": "^17.3.10",
     "@angular/platform-browser": "^17.1.0",
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/router": "^17.1.0",
