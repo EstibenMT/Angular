@@ -1,0 +1,19 @@
+
+<mat-form-field class="custom-size">
+  <mat-label>Device</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+    (input)="onInputChange($event)"    
+  />
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onOptionSelected($event)">
+    @for (device of filteredOptions | async; track device) {
+        <mat-option [value]="device">
+          {{ device.serial }} {{device.brand}}
+        </mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>
+

@@ -1,0 +1,18 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Estudiante</mat-label>
+      <input type="text" 
+              matInput 
+              [formControl]="myControl" 
+              [matAutocomplete]="auto"
+              (input)="onInputChange($event)"                
+              />              
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onOptionSelected($event)" >
+        @for (student of filteredOptions | async; track student) {
+          <mat-option [value]="student">
+            {{student.identificationCard}}  {{ student.name }} {{ student.lastName }}
+          </mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+</form>
