@@ -1,0 +1,11 @@
+<form class="example-form">
+  <mat-form-field>
+    <mat-label>Tipo de estudiante</mat-label>
+    <mat-select name="studentType" [(ngModel)]="currentType" (selectionChange)="onSelect($event.value)" >
+      <mat-option *ngFor="let type of studentTypes" [value]="type">
+        {{ type }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
