@@ -10,7 +10,7 @@
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onOptionSelected($event)" >
         @for (student of filteredOptions | async; track student) {
           <mat-option [value]="student">
-            {{student.identificationCard}}  {{ student.name }} {{ student.lastName }}
+            {{student.identificationCard}} - {{ student.name }} {{ student.lastName }}
           </mat-option>
         }
       </mat-autocomplete>
