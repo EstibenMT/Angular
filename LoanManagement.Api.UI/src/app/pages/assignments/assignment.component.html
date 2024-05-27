@@ -1,0 +1,21 @@
+<div class="mat-elevation-z8" style="width: 50%; padding: 100px; margin: 50px auto; display: flex;justify-content: center;">
+
+    <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
+        <mat-card-title>
+            <mat-card-title><p>Asignacionen</p></mat-card-title>
+        </mat-card-title>
+        <div class="flex">
+            <app-student-selector-type [selectedStudentType]="selectedStudentType"  formControlName="studentType"></app-student-selector-type>
+        </div>
+        <div class="flex">
+            <app-student-autocomplete formControlName="student"></app-student-autocomplete>
+        </div>
+        <div class="flex">
+            <app-device-autocomplete formControlName="device"></app-device-autocomplete>
+        </div>
+        <div class="flex">
+            <button type="submit" [disabled]="buttonDisabled" class="btn btn-primary">Enviar</button>
+            <button type="button" (click)="goBack()" class="btn btn-secondary">Regresar</button>
+        </div>
+    </form>
+</div>

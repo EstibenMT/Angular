@@ -1,0 +1,15 @@
+.container {
+    margin-top: 50px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .btn {
+    min-width: 100px;
+  }

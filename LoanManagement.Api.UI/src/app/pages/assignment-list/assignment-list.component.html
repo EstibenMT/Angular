@@ -1,0 +1,109 @@
+<mat-card style="width: 80%; margin: 50px auto">
+  <mat-card-title>
+    <mat-card-title><p>Lista de Asignaciones</p></mat-card-title>
+  </mat-card-title>
+  <mat-card-content>
+    <button mat-flat-button color="primary" (click)="getAssignmentById()">
+      Nueva Asignacion
+    </button>
+    <mat-form-field>
+      <mat-label>Filtrar por:</mat-label>
+      <mat-select [(ngModel)]="filtroTipo">
+        <mat-option value="dni">DNI</mat-option>
+        <mat-option value="serial">Número de serie</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput type="text" placeholder="Ingrese el valor de filtro..." [(ngModel)]="filtroTexto">
+    </mat-form-field>
+    
+
+    <table
+      mat-table
+      [dataSource]="filtrarLista()"
+      class="mat-elevation-z2"
+      style="margin-top: 20px"
+    >
+      <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Nor</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="deviceType">
+        <th mat-header-cell *matHeaderCellDef>Dispositivo</th>
+        <td mat-cell *matCellDef="let element">
+          @if(element.device.deviceType == 'GraphicTablet'){
+            <p>Tableta Grafica</p>
+          }@else {
+            <p>{{ element.device.deviceType }}</p>
+          }          
+        </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="serial">
+        <th mat-header-cell *matHeaderCellDef>No. serie</th>
+        <td mat-cell *matCellDef="let element">{{ element.device.serial }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef>Marca</th>
+        <td mat-cell *matCellDef="let element">{{ element.device.brand}}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Asignado</th>
+        <td mat-cell *matCellDef="let element">{{ element.student.name }} {{ element.student.lastName }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="student">
+        <th mat-header-cell *matHeaderCellDef>DNI</th>
+        <td mat-cell *matCellDef="let element">{{ element.student.identificationCard }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="loanDate">
+        <th mat-header-cell *matHeaderCellDef>Fecha de Asignacion</th>
+        <td mat-cell *matCellDef="let element">{{ element.loanDate | date: 'dd/MM/yyyy'}}
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="deadline">
+        <th mat-header-cell *matHeaderCellDef>Fecha de Entrega</th>
+        <td mat-cell *matCellDef="let element">{{ element.deadline | date: 'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Accion">
+        <th mat-header-cell *matHeaderCellDef>Accion</th>
+        <td mat-cell *matCellDef="let element">
+          @if (!element.deadline) {
+            <button mat-icon-button color="primary" (click)="updateAssignment(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="green" (click)="updateAssignmentDate(element)">
+              <mat-icon>check</mat-icon>
+            </button>
+          }
+
+          <button mat-icon-button color="warn" (click)="deleteAssignment(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
