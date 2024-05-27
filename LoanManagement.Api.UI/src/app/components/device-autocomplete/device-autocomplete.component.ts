@@ -93,7 +93,7 @@ export class DeviceAutocompleteComponent implements OnInit, ControlValueAccessor
     return this.deviceService.getDeviceByType(this.selectedType).pipe(
       map(devices =>
         devices.filter((device: any) =>       
-          device.serial.toLowerCase().includes(filterValue)? device.serial.toLowerCase().includes(filterValue) : null
+          device.serial.toLowerCase().includes(filterValue)
         )
       )
     );
