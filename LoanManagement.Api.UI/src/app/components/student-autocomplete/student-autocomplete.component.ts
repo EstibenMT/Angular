@@ -66,7 +66,7 @@ export class StudentAutocompleteComponent implements OnInit, ControlValueAccesso
 
   ngOnInit() {
     this.studentTypeService.getSelectedType().subscribe(type => {
-      this.myControl.setValue('null');
+      this.myControl.setValue(null);
       this.onChange(null);
       this.selectedType = type;
       this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -76,7 +76,7 @@ export class StudentAutocompleteComponent implements OnInit, ControlValueAccesso
           if (typeof identificationCard === 'string') {
             return this._filter(identificationCard);
           } else {
-            return of([]); // Si identificationCard no es un string, devolvemos un arreglo vacío
+            return of([]); 
           }
         })
       );
@@ -84,20 +84,20 @@ export class StudentAutocompleteComponent implements OnInit, ControlValueAccesso
   }
 
   displayFn(student: any): string {
-    return student && student.identificationCard ? `${student.identificationCard} ${student.name} ${student.lastName}` : '';
+    return student && student.identificationCard ? `${student.identificationCard} ${student.brand}` : '';
   }
 
   private _filter(identificationCard: string): Observable<any[]> {
     const filterValue = identificationCard.toLowerCase();
     return this.studentService.getStudentByType(this.selectedType).pipe(
       map(students =>
-        students.filter((student: any) =>
-          student.identificationCard.toLowerCase().includes(filterValue) ?student.identificationCard.toLowerCase().includes(filterValue) : null
+        students.filter((student: any) =>       
+          student.identificationCard.includes(filterValue)
         )
       )
     );
   }
-
+  
   onOptionSelected(event: MatAutocompleteSelectedEvent) {
     const student = event.option.value;
     this.onChange(student);
@@ -106,7 +106,7 @@ export class StudentAutocompleteComponent implements OnInit, ControlValueAccesso
   onInputChange(event: any) {
     const inputValue = event.target.value;
     if (!inputValue) {
-      this.filteredOptions = this.studentService.getStudentByType(this.selectedType);
+      //this.filteredOptions = this.studentService.getStudentByType(this.selectedType);
       this.myControl.setValue(null);
       this.onChange(null);
     }
